@@ -29,3 +29,6 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+    - name: Trigger Dokploy Deployment
+      run: |
+        curl -X 'GET' https://dokploy.introrp.com/api/deploy/AqOEFox-ASOK7GjsBanF-
