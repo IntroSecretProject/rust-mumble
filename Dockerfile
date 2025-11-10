@@ -14,7 +14,9 @@ RUN --mount=type=cache,target=/usr/local/cargo,from=rust,source=/usr/local/cargo
     --mount=type=cache,target=target \
     cargo build --release --target x86_64-unknown-linux-musl && cp target/x86_64-unknown-linux-musl/release/rust-mumble /rust-mumble
 
-FROM scratch
+FROM alpine:3.20
+
+RUN apk add --no-cache ca-certificates
 
 COPY --from=builder /rust-mumble /rust-mumble
 
