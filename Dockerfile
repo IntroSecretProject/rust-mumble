@@ -32,12 +32,10 @@ ENV HTTP_USER=changeme
 
 ENV RUST_LOG=info
 
-CMD [
-    "/rust-mumble"
-    "--listen", "${MUMBLE_LISTENER}",
-    "--http-listen", "${HTTP_LISTENER}",
-    "--http-user", "${HTTP_USER}",
-    "--http-password", "${HTTP_PASSWORD}",
-    "--restrict-to-version", "${MUMBLE_RESTRICT_TO_VERSION}",
-    "--http-log"
-]
+CMD /rust-mumble \
+    --listen "$MUMBLE_LISTENER" \
+    --http-listen "$HTTP_LISTENER" \
+    --http-user "$HTTP_USER" \
+    --http-password "$HTTP_PASSWORD" \
+    --restrict-to-version "$MUMBLE_RESTRICT_TO_VERSION" \
+    --http-log
