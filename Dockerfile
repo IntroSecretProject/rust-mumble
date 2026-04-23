@@ -20,11 +20,11 @@ RUN apk add --no-cache ca-certificates
 
 COPY --from=builder /rust-mumble /rust-mumble
 
-EXPOSE 64738/udp
-EXPOSE 64738/tcp
+EXPOSE 31400/udp
+EXPOSE 31400/tcp
 
 ENV MUMBLE_RESTRICT_TO_VERSION=CitizenFX
-ENV MUMBLE_LISTENER=0.0.0.0:64738
+ENV MUMBLE_LISTENER=0.0.0.0:31400
 ENV RUST_LOG=info
 
 CMD /rust-mumble --listen "$MUMBLE_LISTENER" --restrict-to-version "$MUMBLE_RESTRICT_TO_VERSION"
