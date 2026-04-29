@@ -47,14 +47,3 @@ jobs:
           exit-code: '1'
           severity: CRITICAL
           ignore-unfixed: true
-
-      - name: Update image tag in infra repo
-        run: |
-          git clone https://x-access-token:${{ secrets.INFRA_REPO_TOKEN }}@github.com/IntroSecretProject/infra-k3s.git
-          cd infra-k3s
-          sed -i "s|ghcr.io/${{ env.REPO_NAME }}:.*|ghcr.io/${{ env.REPO_NAME }}:${{ github.sha }}|g" apps/${{ env.APP_NAME }}/deployment.yaml
-          git config user.email "ci@github.com"
-          git config user.name "GitHub Actions"
-          git add apps/${{ env.APP_NAME }}/deployment.yaml
-          git commit -m "Update ${{ env.APP_NAME }} image to ${{ github.sha }}"
-          git push
