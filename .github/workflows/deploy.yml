@@ -39,6 +39,15 @@ jobs:
             ghcr.io/${{ env.REPO_NAME }}:latest
             ghcr.io/${{ env.REPO_NAME }}:${{ github.sha }}
 
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ghcr.io/${{ env.REPO_NAME }}:${{ github.sha }}
+          format: table
+          exit-code: '1'
+          severity: CRITICAL
+          ignore-unfixed: true
+
       - name: Update image tag in infra repo
         run: |
           git clone https://x-access-token:${{ secrets.INFRA_REPO_TOKEN }}@github.com/IntroSecretProject/infra-k3s.git
